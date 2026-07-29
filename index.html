@@ -86,7 +86,171 @@ img{max-width:100%;display:block}
   position: absolute;
   inset: 0;
 }
+.location-gallery {
+  width: 100%;
+}
 
+.location-gallery__title {
+  margin: 0 0 24px;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.location-gallery__grid {
+  margin: 30px 0 ;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.location-gallery__item {
+  position: relative;
+  display: block;
+  width: 100%;
+  height:260px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f2f2f2;
+  cursor: zoom-in;
+  aspect-ratio: 4 / 3;
+}
+
+.location-gallery__item::after {
+  content: "＋";
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: 0.3s ease;
+}
+
+.location-gallery__item .img-real img {
+  display: block;
+  width: 100%;
+  height: 210px!important;
+  
+  transition: transform 0.4s ease;
+}
+
+.location-gallery__item:hover img {
+  transform: scale(1.05);
+}
+
+.location-gallery__item:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Lightbox */
+.location-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.88);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+}
+
+.location-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.location-lightbox__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1400px;
+  max-height: 90vh;
+}
+
+.location-lightbox__content img {
+  display: block;
+  max-width: 100%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.location-lightbox__close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 38px;
+  line-height: 44px;
+  cursor: pointer;
+}
+
+.location-lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+body.location-lightbox-open {
+  overflow: hidden;
+}
+
+
+/* Tablet */
+@media (max-width: 767px) {
+  .location-gallery__grid {
+    grid-template-columns:1fr;
+    gap: 10px;
+  }
+
+  .location-gallery__item:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+
+  .location-gallery__title {
+    margin-bottom: 16px;
+    font-size: 26px;
+  }
+
+  .location-lightbox {
+    padding: 15px;
+  }
+
+  .location-lightbox__close {
+    top: 10px;
+    right: 10px;
+  }
+}
 /* Slide */
 .sap-slide {
   position: absolute;
@@ -128,6 +292,332 @@ img{max-width:100%;display:block}
   transform: scale(1);
 }
 
+.partners-slider {
+  position: relative;
+  width: 100%;
+  padding: 8px 4px 28px;
+}
+
+.partners-viewport {
+  width: 100%;
+  overflow: hidden;
+  padding: 12px 0 24px;
+}
+
+.partners-track {
+  display: flex;
+  align-items: stretch;
+  gap: 22px;
+
+  transition: transform 0.55s ease;
+  will-change: transform;
+}
+
+/* ============ CARD ĐỐI TÁC ============ */
+
+.partners-track .partner-card {
+  position: relative;
+
+  flex: 0 0 calc((100% - 44px) / 3);
+  width: calc((100% - 44px) / 3);
+  min-height: 180px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 28px 24px 24px;
+
+  overflow: hidden;
+  box-sizing: border-box;
+
+  border: 1px solid rgba(202, 148, 31, 0.28);
+  border-radius: 22px;
+
+  background:
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(26, 110, 98, 0.08),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #fffdf7 100%
+    );
+
+  box-shadow:
+    0 12px 35px rgba(11, 68, 60, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* Đường vàng trên card */
+
+.partners-track .partner-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 28px;
+  right: 28px;
+
+  height: 4px;
+  border-radius: 0 0 10px 10px;
+
+  background: linear-gradient(
+    90deg,
+    #b87a12 0%,
+    #f2c75c 50%,
+    #b87a12 100%
+  );
+}
+
+/* Họa tiết trang trí */
+
+.partners-track .partner-card::after {
+  content: "";
+  position: absolute;
+  right: -55px;
+  bottom: -55px;
+
+  width: 145px;
+  height: 145px;
+
+  border: 1px solid rgba(14, 77, 69, 0.08);
+  border-radius: 50%;
+
+  background: rgba(14, 77, 69, 0.025);
+  pointer-events: none;
+}
+
+.partners-track .partner-card:hover {
+  transform: translateY(-8px);
+
+  border-color: rgba(202, 148, 31, 0.6);
+
+  box-shadow:
+    0 20px 50px rgba(11, 68, 60, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Nhãn vai trò */
+
+.partner-card__role {
+  position: relative;
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 30px;
+  padding: 7px 15px;
+
+  border: 1px solid rgba(202, 148, 31, 0.24);
+  border-radius: 999px;
+
+  color: #a36d13;
+  background: rgba(229, 168, 35, 0.12);
+
+  font-size: 0.7rem;
+  
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Tên đối tác */
+
+.partners-track .partner-card h3 {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  margin: auto 0 10px;
+  padding: 0!important;
+  color: #0e4d45;
+
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* Nội dung mô tả */
+
+.partners-track .partner-card p {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  min-height: 50px;
+  margin: 0;
+
+  color: #687976;
+
+  font-size: 0.86rem;
+  font-weight: 400;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.partners-track .partner-card p::before {
+  content: "";
+  display: block;
+
+  width: 38px;
+  height: 1px;
+
+  margin: 0 auto 12px;
+
+  background: rgba(202, 148, 31, 0.48);
+}
+
+/* ============ NÚT SLIDER ============ */
+
+.partners-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid rgba(202, 148, 31, 0.4);
+  border-radius: 50%;
+
+  color: #0e4d45;
+  background: rgba(255, 255, 255, 0.97);
+
+  box-shadow: 0 10px 28px rgba(11, 68, 60, 0.16);
+
+  font-family: Arial, sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+
+  cursor: pointer;
+  transform: translateY(-50%);
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.partners-arrow:hover {
+  color: #ffffff;
+  background: #0e4d45;
+  border-color: #0e4d45;
+
+  transform: translateY(-50%) scale(1.06);
+}
+
+.partners-arrow--prev {
+  left: -23px;
+}
+
+.partners-arrow--next {
+  right: -23px;
+}
+
+.partners-arrow:disabled {
+  opacity: 0.28;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ============ TABLET ============ */
+
+@media (max-width: 900px) {
+  .partners-track .partner-card {
+    flex: 0 0 calc((100% - 22px) / 2);
+    width: calc((100% - 22px) / 2);
+    min-height: 270px;
+
+    padding: 26px 20px 22px;
+    border-radius: 20px;
+  }
+
+  .partners-arrow--prev {
+    left: 6px;
+  }
+
+  .partners-arrow--next {
+    right: 6px;
+  }
+}
+
+/* ============ MOBILE ============ */
+
+@media (max-width: 600px) {
+  .partners-slider {
+    padding: 5px 0 62px;
+  }
+
+  .partners-viewport {
+    padding: 10px 0 15px;
+  }
+
+  .partners-track {
+    gap: 16px;
+  }
+
+  .partners-track .partner-card {
+    flex: 0 0 100%;
+    width: 100%;
+    min-height: 180px;
+
+    padding: 24px 18px 22px;
+    border-radius: 18px;
+  }
+
+  .partners-track .partner-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .partners-track .partner-card p {
+    min-height: auto;
+    font-size: 0.84rem;
+  }
+
+  .partners-arrow {
+    top: auto;
+    bottom: 5px;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 1.7rem;
+    transform: none;
+  }
+
+  .partners-arrow:hover {
+    transform: scale(1.06);
+  }
+
+  .partners-arrow--prev {
+    left: calc(50% - 50px);
+  }
+
+  .partners-arrow--next {
+    right: calc(50% - 50px);
+  }
+}
+
 /* Lớp phủ */
 .sap-slide-shade {
   position: absolute;
@@ -167,17 +657,24 @@ img{max-width:100%;display:block}
 }
 
 .sap-slide-content p {
-  max-width: 600px;
-  margin: 0 auto 10px;
-  font-size: 1.05rem;
+  max-width: 680px;
+  margin: 20px auto 0;
+  padding: 16px 24px;
+
+  color: #111;
+  background: rgba(255, 255, 255, 0);
+
+  border-radius: 14px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  font-weight: 600;
   line-height: 1.65;
-  font-weight: 500;
-  color: black;
-  opacity: 0;
+    opacity: 0;
   transform: translateY(25px);
   transition:
-    opacity 0.8s ease 0.4s,
-    transform 0.8s ease 0.4s;
+    opacity 0.8s ease 0.25s,
+    transform 0.8s ease 0.25s;
 }
 
 .sap-slide.is-active .sap-slide-content h2,
@@ -213,7 +710,131 @@ img{max-width:100%;display:block}
     background 0.3s ease,
     border-color 0.3s ease;
 }
+.mt-3{
+  margin-top: 10px;
+}
+.green-banner {
+  width: 100%;
+  margin: 0;
+}
 
+.green-banner-viewport {
+  position: relative;
+  width: 100%;
+  height:350px;
+  overflow: hidden;
+  border-radius: 16px;
+  aspect-ratio: 4 / 5;
+  background: #163f34;
+}
+
+.green-banner-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(.22, .61, .36, 1);
+  will-change: transform;
+}
+
+.green-banner-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.green-banner-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Nút qua lại */
+.green-banner-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.28);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: 0.25s ease;
+}
+
+.green-banner-btn:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.green-banner-prev {
+  left: 16px;
+}
+
+.green-banner-next {
+  right: 16px;
+}
+
+/* Chấm điều hướng */
+.green-banner-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  transform: translateX(-50%);
+}
+
+.green-banner-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.green-banner-dot.active {
+  width: 26px;
+  border-radius: 20px;
+  background: var(--gold-light, #dcbf77);
+}
+
+.green-banner figcaption {
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .green-banner-viewport {
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+  }
+
+  .green-banner-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 17px;
+  }
+
+  .green-banner-prev {
+    left: 10px;
+  }
+
+  .green-banner-next {
+    right: 10px;
+  }
+}
 .sap-slide:hover .sap-slide-button {
   color: #fff;
   background: #174334;
@@ -485,6 +1106,154 @@ img{max-width:100%;display:block}
 .hero-typo span+span::before{content:"•";margin-right:10px;color:rgba(255,255,255,.4)}
 .hero-cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
 .hero-usp{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:560px}
+.hero-usp-wrap {
+  position: relative;
+  padding-bottom: 72px;
+}
+
+
+
+
+.usp-interest {
+  width: 100%;
+  display: grid;
+  gap:2px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 5px;
+}
+
+.usp-interest-item {
+  min-width: 0;
+  text-align: center;
+}
+
+.usp-interest-item + .usp-interest-item {
+  border-left: 1px solid rgba(6, 75, 67, 0.4);
+}
+
+.interest-number {
+  font-size: 1.45rem;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.interest-note {
+  margin-top: 5px;
+  font-size: 0.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+
+
+.usp-card .lbl {
+  margin-bottom: 5px;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+.usp-interest-card{
+  padding: 14px 0!important;
+}
+
+.usp-card .big {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.usp-card .big-text {
+  font-size: 1.1rem;
+  line-height: 1.05;
+}
+
+.usp-card .u {
+  padding-bottom: 2px;
+
+  font-size: 0.62rem;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.usp-card .sub {
+  margin-top: 6px;
+
+  font-size: 0.58rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Khối lãi suất nằm phía dưới ô 3 và ô 4 */
+
+.hero-interest {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  width: calc(50% - 6px);
+  max-width: 245px;
+
+  padding: 8px 10px 9px;
+
+  color: #064b43;
+  text-align: center;
+
+  background: linear-gradient(
+    145deg,
+    #ffe286 0%,
+    #f5bf35 100%
+  );
+
+  border-radius: 7px;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.interest-title {
+  margin-bottom: 4px;
+
+  font-size: 0.62rem;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.interest-item {
+  padding: 0 8px;
+}
+
+.interest-item + .interest-item {
+  border-left: 1px solid rgba(6, 75, 67, 0.4);
+}
+
+.interest-value {
+  font-size: 1.4rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.interest-sub {
+  margin-top: 4px;
+
+  font-size: 0.52rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
 .usp-card{background:var(--gold-grad);border-radius:var(--r-sm);padding:14px 10px;text-align:center;color:var(--teal-900);
   display:flex;flex-direction:column;justify-content:center;min-height:96px}
 .usp-card .lbl{font-size:.6rem;font-weight:700;letter-spacing:.03em;line-height:1.4;text-transform:uppercase;opacity:.85}
@@ -666,7 +1435,7 @@ img{max-width:100%;display:block}
 .green .section-head h2,.green .eyebrow-serif{color:#fff}
 .green-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:stretch}
 .green-grid>div:last-child{display:flex;flex-direction:column}
-.green-grid .img-real{height:100%;display:flex;flex-direction:column}
+.green-grid .img-real{display:flex;flex-direction:column}
 .green-grid .img-real img{flex:1;object-fit:cover;min-height:360px}
 .green-layers{display:flex;flex-direction:column;gap:20px}
 .layer{background:rgba(255,255,255,.06);border-radius:var(--r-md);padding:24px 26px;display:flex;gap:18px;align-items:flex-start}
@@ -697,7 +1466,7 @@ img{max-width:100%;display:block}
 .nbh-copy p{color:rgba(255,255,255,.85);font-size:.96rem;margin-bottom:22px}
 .nbh-copy .btn{align-self:flex-start}
 .nbh-img{position:relative;min-height:100%}
-.nbh-img img{width:100%;height:100%;object-fit:cover;min-height:290px}
+.nbh-img img{width:100%;height:100%;min-height:290px}
 @media(max-width:768px){
   .no-back-highlight{grid-template-columns:1fr}
   .nbh-img{order:-1}
@@ -862,7 +1631,7 @@ img{max-width:100%;display:block}
 @media(max-width:560px){.modal-head{padding:22px 20px 18px}.modal-body{padding:20px}}
 
 /* ============ THANH CTA ĐÁY TRANG (dùng chung desktop + mobile) ============ */
-.cta-bar{position:fixed;left:0;right:0;bottom:0;z-index:815;
+.cta-bar{position:fixed;left:0;right:0;bottom:0;z-index:815; display:none;
   background:linear-gradient(180deg,rgba(14,77,69,.97),rgba(10,61,56,.99));
   backdrop-filter:blur(10px);box-shadow:0 -8px 28px rgba(0,0,0,.28);
   transform:translateY(110%);transition:transform .4s var(--ease)}
@@ -895,35 +1664,395 @@ img{max-width:100%;display:block}
 }
 
 /* ============ POPUP KHUYẾN MÃI ============ */
-.promo-overlay{position:fixed;inset:0;background:rgba(6,30,27,.72);backdrop-filter:blur(4px);
-  z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;
-  opacity:0;visibility:hidden;transition:.4s var(--ease)}
-.promo-overlay.show{opacity:1;visibility:visible}
-.promo-modal{background:var(--teal-grad);border-radius:var(--r-xl);max-width:560px;width:100%;
-  position:relative;overflow:hidden;transform:scale(.9) translateY(20px);transition:.4s var(--ease);
-  box-shadow:0 40px 90px rgba(0,0,0,.5)}
-.promo-overlay.show .promo-modal{transform:scale(1) translateY(0)}
-.promo-modal::before{content:"";position:absolute;inset:0;background:
-  radial-gradient(circle at 80% 0%,rgba(229,168,35,.35),transparent 55%);z-index:0}
-.promo-close{position:absolute;top:14px;right:14px;z-index:5;width:38px;height:38px;border-radius:50%;
-  background:rgba(255,255,255,.16);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;
-  justify-content:center;transition:.25s;backdrop-filter:blur(4px)}
-.promo-close:hover{background:rgba(255,255,255,.3);transform:rotate(90deg)}
-.promo-close svg{width:22px;height:22px}
-.promo-body{position:relative;z-index:2;padding:44px 38px 36px;text-align:center;color:#fff}
-.promo-logo{height:74px;width:auto;margin:0 auto 14px;display:block}
-.promo-body .k{font-size:.8rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-light)}
-.promo-body h3{font-family:'Playfair Display',Georgia,serif;font-size:2.3rem;font-weight:700;color:#fff;
-  font-style:italic;margin:8px 0 10px;line-height:1.32;padding:.06em 0}
-.promo-body .lead-txt{font-size:.98rem;color:rgba(255,255,255,.85);margin-bottom:22px}
-.promo-vouchers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:26px}
-.pv{background:var(--gold-grad);border-radius:var(--r-sm);padding:14px 8px;color:var(--teal-900)}
-.pv .t{font-size:.6rem;font-weight:700;line-height:1.4;text-transform:uppercase}
-.pv .b{font-size:1.7rem;font-weight:800;line-height:1;margin-top:4px}
-.pv .b small{font-size:.9rem}
-.promo-body .btn{margin-bottom:12px}
-.promo-body .skip{background:none;border:none;color:rgba(255,255,255,.55);font-size:.82rem;
-  cursor:pointer;font-family:inherit;text-decoration:underline}
+/* ============ POPUP KHUYẾN MÃI ============ */
+
+.promo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(6, 30, 27, 0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.4s var(--ease),
+    visibility 0.4s var(--ease);
+}
+
+.promo-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.promo-modal {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+
+  overflow: hidden;
+
+  background: var(--teal-grad);
+  border-radius: var(--r-xl);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.5);
+
+  transform: scale(0.9) translateY(20px);
+
+  transition: transform 0.4s var(--ease);
+}
+
+.promo-overlay.show .promo-modal {
+  transform: scale(1) translateY(0);
+}
+
+.promo-modal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 80% 0%,
+      rgba(229, 168, 35, 0.35),
+      transparent 55%
+    );
+}
+
+/* Nút đóng */
+
+.promo-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 5;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+
+  cursor: pointer;
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.promo-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.promo-close svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Nội dung */
+
+.promo-body {
+  position: relative;
+  z-index: 2;
+
+  padding: 42px 36px 34px;
+
+  color: #fff;
+  text-align: center;
+}
+
+.promo-logo {
+  display: block;
+
+  width: auto;
+  height: 74px;
+
+  margin: 0 auto 14px;
+
+  object-fit: contain;
+}
+
+.promo-kicker {
+  display: block;
+
+  color: var(--gold-light);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.promo-body h3 {
+  margin: 8px 0 10px;
+
+  color: #fff;
+
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 5vw, 2.45rem);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.promo-body .lead-txt {
+  max-width: 470px;
+
+  margin: 0 auto 22px;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* Các ô ưu đãi */
+
+.promo-vouchers {
+  display: grid;
+  grid-template-columns: 0.9fr 1.35fr 0.9fr;
+  gap: 10px;
+
+  margin-bottom: 24px;
+}
+
+.pv {
+  min-width: 0;
+  min-height: 72px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 8px;
+
+  color: var(--teal-900);
+  background: var(--gold-grad);
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--r-sm);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pv-title {
+  min-height: 18px;
+
+  font-size: 0.6rem;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.pv-value {
+  margin-top: 4px;
+
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pv-value small {
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+/* Ô lãi suất chia đôi */
+
+.pv-interest {
+  padding: 10px 8px 8px;
+}
+
+.interest-list {
+  position: relative;
+
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  margin-top: 3px;
+}
+
+.interest-item {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 5px;
+}
+
+.interest-item + .interest-item {
+  border-left: 1px solid rgba(4, 65, 54, 0.35);
+}
+
+.interest-item .pv-value {
+  font-size: 1.45rem;
+}
+
+.interest-time {
+  margin-top: 3px;
+
+  font-size: 0.52rem;
+  font-weight: 800;
+  line-height: 1.25;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* CTA */
+
+.promo-body .btn-block {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  margin: 0 0 13px;
+  padding: 14px 20px;
+
+  border: 0;
+  border-radius: 999px;
+
+  cursor: pointer;
+}
+
+.promo-body .skip {
+  display: inline-block;
+
+  margin: 0;
+  padding: 3px 5px;
+
+  border: 0;
+
+  color: rgba(255, 255, 255, 0.6);
+  background: transparent;
+
+  font-family: inherit;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  text-decoration: underline;
+
+  cursor: pointer;
+}
+
+.promo-body .skip:hover {
+  color: #fff;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .promo-overlay {
+    padding: 14px;
+  }
+
+  .promo-body {
+    padding: 42px 20px 28px;
+  }
+
+  .promo-logo {
+    height: 62px;
+  }
+
+  .promo-body .lead-txt {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .promo-vouchers {
+    grid-template-columns: 1fr 1.4fr 1fr;
+    gap: 6px;
+  }
+
+  .pv {
+    min-height: 67px;
+    padding: 10px 4px;
+  }
+
+  .pv-title {
+    font-size: 0.5rem;
+  }
+
+  .pv-value {
+    font-size: 1.35rem;
+  }
+
+  .pv-value small {
+    font-size: 0.65rem;
+  }
+
+  .interest-item {
+    padding: 0 3px;
+  }
+
+  .interest-item .pv-value {
+    font-size: 1.15rem;
+  }
+
+  .interest-time {
+    font-size: 0.42rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .promo-body {
+    padding-inline: 16px;
+  }
+
+  .promo-vouchers {
+    grid-template-columns: 1fr;
+  }
+
+  .pv {
+    min-height: 66px;
+  }
+
+  .pv-interest {
+    min-height: 76px;
+  }
+
+  .pv-title {
+    font-size: 0.58rem;
+  }
+
+  .interest-time {
+    font-size: 0.5rem;
+  }
+}
 
 /* ============ REVEAL ANIM ============ */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -971,27 +2100,140 @@ img{max-width:100%;display:block}
 <body>
 
 <!-- ============ POPUP KHUYẾN MÃI (tự bật sau 2s) ============ -->
-<div class="promo-overlay" id="promoOverlay" role="dialog" aria-modal="true" aria-label="Ưu đãi Senturia An Phú">
+<div
+  class="promo-overlay"
+  id="promoOverlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Ưu đãi Senturia An Phú"
+>
   <div class="promo-modal">
-    <button class="promo-close" id="promoClose" aria-label="Đóng thông báo">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+
+    <button
+      class="promo-close"
+      id="promoClose"
+      type="button"
+      aria-label="Đóng thông báo"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
     </button>
+
     <div class="promo-body">
-      <img class="promo-logo" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="logo" alt="Senturia An Phú">
-      <span class="k">Ưu đãi giới hạn từ Chủ đầu tư</span>
+
+      <img
+        class="promo-logo"
+        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+        data-si="logo"
+        alt="Senturia An Phú"
+      >
+
+      <span class="promo-kicker">
+        Ưu đãi giới hạn từ Chủ đầu tư
+      </span>
+
       <h3>An Tâm Sở Hữu</h3>
-      <p class="lead-txt">Chính sách hỗ trợ tài chính <b>48 tháng</b> - Home Resort tại trung tâm TP.HCM. Đăng ký ngay để nhận bảng giá & giỏ hàng căn đẹp.</p>
+
+      <p class="lead-txt">
+        Chính sách hỗ trợ tài chính <strong>48 tháng</strong> -
+        Home Resort tại trung tâm TP.HCM. Đăng ký ngay để nhận
+        bảng giá &amp; giỏ hàng căn đẹp.
+      </p>
+
       <div class="promo-vouchers">
-        <div class="pv"><div class="t">Thanh toán chỉ</div><div class="b">30<small>%</small></div></div>
-        <div class="pv"><div class="t">Lãi suất 24 tháng đầu</div><div class="b">0<small>%</small></div></div>
-        <div class="pv"><div class="t">Ân hạn nợ gốc</div><div class="b">48<small> tháng</small></div></div>
+
+        <!-- Thanh toán -->
+        <div class="pv">
+          <div class="pv-title">Thanh toán chỉ</div>
+
+          <div class="pv-value">
+            30<small>%</small>
+          </div>
+        </div>
+
+        <!-- Lãi suất -->
+        <div class="pv pv-interest">
+          <div class="pv-title">Lãi suất</div>
+
+          <div class="interest-list">
+
+            <div class="interest-item">
+              <div class="pv-value">
+                0<small>%</small>
+              </div>
+
+              <div class="interest-time">
+                24 tháng đầu
+              </div>
+            </div>
+
+            <div class="interest-item">
+              <div class="pv-value">
+                7.5<small>%</small>
+              </div>
+
+              <div class="interest-time">
+                24 tháng sau
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Ân hạn -->
+        <div class="pv">
+          <div class="pv-title">Ân hạn nợ gốc</div>
+
+          <div class="pv-value">
+            48<small> tháng</small>
+          </div>
+        </div>
+
       </div>
-      <button class="btn btn-gold btn-block" id="promoCta">
-        Nhận ưu đãi ngay
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+
+      <button
+        class="btn btn-gold btn-block"
+        id="promoCta"
+        type="button"
+      >
+        <span>Nhận ưu đãi ngay</span>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
+        </svg>
       </button>
-      <br>
-      <button class="skip" id="promoSkip">Để sau, xem dự án trước</button>
+
+      <button
+        class="skip"
+        id="promoSkip"
+        type="button"
+      >
+        Để sau, xem dự án trước
+      </button>
+
     </div>
   </div>
 </div>
@@ -1045,15 +2287,15 @@ img{max-width:100%;display:block}
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true">
-    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="hero" alt="">
+  <div class="hero-bg">
+    <img src="./banner.jpg" alt="">
   </div>
   <div class="container">
     <div class="hero-grid">
       <div class="hero-copy reveal">
         <span class="badge-loc">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          Mặt tiền Song Hành - TP.HCM
+          Mặt tiền Song Hành cao tốc LT - DG, TPHCM
         </span>
         <h1>SENTURIA AN PHÚ<em>Home Resort<br><span class="nb">tại trung tâm TP.HCM</span></em></h1>
         <p class="hero-sub">Khu an ninh riêng tư thấp tầng 8,6ha - nơi an cư xanh riêng tư và tài sản tích lũy đón đầu giá trị khu Đông.</p>
@@ -1064,12 +2306,53 @@ img{max-width:100%;display:block}
           <a href="#dangky" class="btn btn-gold">Nhận bảng giá & ưu đãi</a>
           <a href="#sanpham" class="btn btn-ghost">Khám phá dự án</a>
         </div>
-        <div class="hero-usp">
-          <div class="usp-card"><div class="lbl">Giỏ hàng căn đẹp</div><div class="big" style="font-size:1.15rem">ĐỘC QUYỀN</div><div class="sub">từ chủ đầu tư</div></div>
-          <div class="usp-card"><div class="lbl">Thanh toán chỉ</div><div class="big">30<span class="u">%</span></div><div class="sub">nhận nhà 2026</div></div>
-          <div class="usp-card"><div class="lbl">Hỗ trợ tài chính</div><div class="big">48<span class="u">tháng</span></div><div class="sub">bảo hộ lãi suất</div></div>
-          <div class="usp-card"><div class="lbl">Ân hạn nợ gốc</div><div class="big">24<span class="u">tháng</span></div><div class="sub">giảm áp lực vốn</div></div>
-        </div>
+        <div class="hero-usp-wrap">
+
+<div class="hero-usp">
+
+  <div class="usp-card">
+    <div class="lbl">Giỏ hàng căn đẹp</div>
+    <div class="big" style="font-size:1.15rem">ĐỘC QUYỀN</div>
+    <div class="sub">từ chủ đầu tư</div>
+  </div>
+
+  <div class="usp-card">
+    <div class="lbl">Thanh toán chỉ</div>
+    <div class="big">
+      30<span class="u">%</span>
+    </div>
+    <div class="sub">nhận nhà 2026</div>
+  </div>
+
+  <div class="usp-card usp-interest-card">
+    <div class="lbl">Lãi suất</div>
+
+    <div class="usp-interest">
+      <div class="usp-interest-item">
+        <div class="interest-number">0%</div>
+        <div class="interest-note sub">24 tháng đầu</div>
+      </div>
+
+      <div class="usp-interest-item">
+        <div class="interest-number">7.5%</div>
+        <div class="interest-note sub">24 tháng sau</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="usp-card">
+    <div class="lbl">Ân hạn nợ gốc</div>
+    <div class="big">
+      48<span class="u">tháng</span>
+    </div>
+    <div class="sub">giảm áp lực vốn</div>
+  </div>
+
+</div>
+
+
+
+</div>
         <p class="hero-note">*Hình ảnh và thông tin chỉ mang tính chất minh họa. Chính sách áp dụng theo từng thời điểm của chủ đầu tư.</p>
       </div>
 
@@ -1156,9 +2439,8 @@ img{max-width:100%;display:block}
       rel="noopener"
     >
       <img
-        src="image.png"
-        data-si="town"
-        alt="Kiến trúc nhà phố Senturia An Phú"
+        src="./kien-truc-2-mat-thoang.png"
+     alt="Kiến trúc nhà phố Senturia An Phú"
       >
 
       <div class="sap-slide-shade"></div>
@@ -1183,8 +2465,8 @@ img{max-width:100%;display:block}
       rel="noopener"
     >
       <img
-        src=".image-2.png"
-        data-si="park"
+        src="./canh-quan-noi-khu.png"
+        
         alt="Cảnh quan tiện ích nội khu Senturia An Phú"
       >
 
@@ -1210,8 +2492,8 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
       rel="noopener"
     >
       <img
-        src=".image-3.png"
-        data-si="hero"
+        src="./home-resport.png"
+    
         alt="Thiết kế Home Resort Senturia An Phú"
       >
 
@@ -1224,12 +2506,12 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
           Giữa phố thị, bạn tìm thấy một miền xanh để hít thở,
           một mái ấm để trở về và một chốn an yên để sống trọn
           từng khoảnh khắc cùng người thân.
-        </p>
 
-        <p>
           Mỗi ngôi nhà được kiến tạo như một tác phẩm phiên bản giới hạn,
           mang đến trải nghiệm sống cân bằng thân – tâm – trí.
         </p>
+
+     
 
 
       </div>
@@ -1243,15 +2525,14 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
       rel="noopener"
     >
       <img
-        src=".image-1.png"
-        data-si="villa"
-        alt="Biệt thự ven kênh Senturia An Phú"
+        src="./bien-thu-ven-song.png"
+        alt="Biệt thự ven sông Senturia An Phú"
       >
 
       <div class="sap-slide-shade"></div>
 
       <div class="sap-slide-content">
-        <h2>BIỆT THỰ VEN KÊNH</h2>
+        <h2>BIỆT THỰ VEN SÔNG</h2>
 
         <p>
          Sở hữu vị thế đắt giá bên dòng cảnh quan xanh mát, biệt thự ven kênh mang đến đặc quyền sống riêng tư và thơ mộng. Tuyệt tác không gian xứng tầm, nơi biến mỗi khoảnh khắc thường nhật thành một kỳ nghỉ đích thực.
@@ -1301,6 +2582,81 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
   </div>
 
 </section>
+  <section class="location-gallery">
+
+<div class="container">
+  
+  <div class="location-gallery__grid">
+
+    <button
+      type="button"
+      class="location-gallery__item"
+      data-full="./img/tien-ich-xung-quanh.png"
+      data-alt="Vị trí dự án - hình 1"
+    >
+  
+       <figure class="img-real">
+          <img  src="./img/tien-ich-xung-quanh.png" alt="Bản đồ vị trí và kết nối Senturia An Phú" loading="lazy">
+          <figcaption>Tiện ích xung quanh dự án</figcaption>
+        </figure>
+    </button>
+
+    <button
+      type="button"
+      class="location-gallery__item"
+      data-full="./img/vi-tri-ga-binh-trung.png"
+      data-alt="Vị trí dự án - hình 2"
+    >
+ 
+      <figure class="img-real">
+          <img  src="./img/vi-tri-ga-binh-trung.png" alt="Bản đồ vị trí và kết nối Senturia An Phú" loading="lazy">
+          <figcaption>Vị trí ngay Ga Bình Trưng, tuyến metro Thủ Thiêm - sân bay Long Thành</figcaption>
+        </figure>
+    </button>
+
+    <button
+      type="button"
+      class="location-gallery__item"
+      data-full="./img/doi-dien-khu-lien-hop.png"
+      data-alt="Vị trí dự án - hình 3"
+    >
+     <figure class="img-real">
+          <img  src="./img/doi-dien-khu-lien-hop.png" alt="Bản đồ vị trí và kết nối Senturia An Phú" loading="lazy">
+          <figcaption>Đối diện Khu liên hợp TDTT Rạch Chiếc - SunGroup phát triển 2026-2030</figcaption>
+        </figure>
+      
+    </button>
+
+  </div>
+</div>
+
+</section>
+
+
+<!-- Popup phóng to ảnh -->
+<div
+  class="location-lightbox"
+  id="locationLightbox"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+>
+  <button
+    type="button"
+    class="location-lightbox__close"
+    aria-label="Đóng ảnh"
+  >
+    &times;
+  </button>
+
+  <div class="location-lightbox__content">
+    <img
+      id="locationLightboxImage"
+      src=""
+      alt=""
+    >
+  </div>
+</div>
 <!-- ============ VỊ TRÍ ============ -->
 <section class="section loc-wrap" id="vitri">
   <div class="container">
@@ -1371,42 +2727,72 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
       <p>Hưởng lợi trực tiếp từ hệ thống hạ tầng tỷ đô đang hình thành quanh dự án.</p>
     </div>
     <figure class="img-real reveal" style="margin-bottom:32px">
-      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="highway" alt="Cao tốc TP.HCM - Long Thành - Dầu Giây và đường Song Hành" loading="lazy">
-      <figcaption>Mặt tiền đường Song Hành - cao tốc TP.HCM - Long Thành - Dầu Giây</figcaption>
+      <!-- <img src="./img/nut-giao-an-phu.png"  alt="Cao tốc TP.HCM - Long Thành - Dầu Giây và đường Song Hành" loading="lazy"> -->
+      <!-- <figcaption>Mặt tiền đường Song Hành - cao tốc TP.HCM - Long Thành - Dầu Giây</figcaption> -->
     </figure>
-    <div class="infra-grid">
-      <div class="infra-card reveal"><span class="num">01</span>
-        <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        <h4><span class="nb">Metro Bến Thành -</span> Thủ Thiêm</h4><p>Gia tăng khả năng kết nối khu Đông với trung tâm thành phố.</p>
+    <!-- <div class="infra-grid">
+      <div class="infra-card reveal">
+        <img src="./img/nut-giao-an-phu.png" alt="">
+     
       </div>
-      <div class="infra-card reveal"><span class="num">02</span>
-        <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-        <h4><span class="nb">Metro Thủ Thiêm -</span> Sân bay Long Thành</h4><p>Mở rộng kết nối quốc tế, rút ngắn thời gian di chuyển.</p>
+      <div class="infra-card reveal">
+        <img src="./img/cao-toc-tpchm-long-thanh.png" alt="">
+     
       </div>
-      <div class="infra-card reveal"><span class="num">03</span>
-        <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-        <h4>Sân bay quốc tế Long Thành</h4><p>Động lực phát triển kinh tế toàn vùng, kéo giá trị BĐS đi lên.</p>
+      <div class="infra-card reveal">
+        <img src="./img/san-bay-quoc-te-long-thanh.png" alt="">
+     
       </div>
-      <div class="infra-card reveal"><span class="num">04</span>
-        <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-        <h4>Khu liên hợp thể thao Rạch Chiếc</h4><p>Quy mô 212ha với Sân vận động 75.000 chỗ, Nhà thi đấu đa năng 18.000 chỗ. Nơi tổ chức những sự kiện thể thao - giải trí mang tầm quốc tế.</p>
+      <div class="infra-card reveal">
+        <img src="./img/thu-thiem-long-thanh.png" alt="">
+     
       </div>
-      <div class="infra-card reveal"><span class="num">05</span>
-        <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg></div>
-        <h4>Nút giao An Phú</h4><p>Nút giao 3 tầng lớn nhất khu Đông - giải toả ùn tắc, thông suốt kết nối tới dự án.</p>
+      <div class="infra-card reveal">
+        <img src="./img/tuyen-duong-sat-cao-toc.png" alt="">
+     
       </div>
-      <div class="infra-card reveal"><span class="num">06</span>
-        <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h16M6 19V9l6-5 6 5v10"/><path d="M10 19v-5h4v5"/></svg></div>
-        <h4>Cao tốc Long Thành mở rộng</h4><p>Mở rộng lên 8-10 làn xe, tăng năng lực lưu thông trục TP.HCM - Long Thành - Dầu Giây.</p>
+      <div class="infra-card reveal">
+        <img src="./img/trung-tam-tai-chinh.png" alt="">
+     
       </div>
-      <div class="infra-card reveal"><span class="num">07</span>
-        <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
-        <h4>Các đại đô thị lân cận</h4><p>Đối diện The Global City - gia tăng hệ sinh thái tiện ích, cộng đồng cư dân văn minh.</p>
+      <div class="infra-card reveal">
+        <img src="./img/khu-lien-hop.png" alt="">
+     
       </div>
-      <div class="infra-card reveal"><span class="num">08</span>
-        <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></div>
-        <h4>Điểm rơi chiến lược 2030</h4><p>Khi hạ tầng hoàn thiện đồng bộ - thời điểm tài sản gia tăng giá trị.</p>
-      </div>
+      
+      
+    </div> -->
+       <div class="infra-grid">
+      <figure class="img-real reveal">
+        <img src="./img/nut-giao-an-phu.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy">
+
+        </figure>
+      <figure class="img-real reveal">
+        <img src="./img/cao-toc-tpchm-long-thanh.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy">
+        
+      
+      </figure>
+      <figure class="img-real reveal">
+        <img src="./img/san-bay-quoc-te-long-thanh.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy">
+        
+      </figure>
+      <figure class="img-real reveal"><img src="./img/thu-thiem-long-thanh.png" alt="Phòng Gym hiện đại" loading="lazy">
+ 
+        
+      </figure>
+      <figure class="img-real reveal"><img src="./img/tuyen-duong-sat-cao-toc.png"  alt="Sân vườn riêng và không gian nghỉ dưỡng" loading="lazy">
+      
+      </figure>
+      <figure class="img-real reveal"><img src="./img/khu-lien-hop.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+          <figure class="img-real reveal"><img src="./img/trung-tam-tai-chinh.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+          <figure class="img-real reveal"><img src="./img/image.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+
+          <figure class="img-real reveal"><img src="./img/3.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+          <figure class="img-real reveal"><img src="./img/4.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+          <figure class="img-real reveal"><img src="./img/5.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+          <figure class="img-real reveal"><img src="./img/6.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+          <figure class="img-real reveal"><img src="./img/image.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+          <figure class="img-real reveal"><img src="./img/2.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
     </div>
     <div class="cta-inline reveal">
       <button class="cta-pulse on-dark js-open-form" data-source="Sau muc Ha tang" data-title="Nhận phân tích tiềm năng tăng giá">
@@ -1429,7 +2815,9 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
     </div>
     <div class="prod-grid">
       <div class="prod-card reveal">
-        <div class="p-img"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="hero" alt="Nhà phố vườn Senturia An Phú" loading="lazy"></div>
+        <div class="p-img">
+          <img src="./img/nha-pho-vuon.png" alt="Nhà phố vườn Senturia An Phú" loading="lazy">
+        </div>
         <div class="p-body">
           <span class="p-tag">202 căn liên kế</span>
           <h4>Nhà phố vườn</h4>
@@ -1444,7 +2832,9 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
         </div>
       </div>
       <div class="prod-card reveal">
-        <div class="p-img"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="villa" alt="Biệt thự song lập Senturia An Phú" loading="lazy"></div>
+        <div class="p-img">
+          <img src="./img/bien-thu-song-lap.png" alt="Biệt thự song lập Senturia An Phú" loading="lazy">
+        </div>
         <div class="p-body">
           <span class="p-tag">62 căn giới hạn</span>
           <h4>Biệt thự song lập</h4>
@@ -1459,7 +2849,9 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
         </div>
       </div>
       <div class="prod-card reveal">
-        <div class="p-img"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="facade" alt="Nhà phố thương mại Shophouse Senturia An Phú" loading="lazy"></div>
+        <div class="p-img">
+          <img src="./img/nha-pho-thuong-mai.png" alt="Nhà phố thương mại Shophouse Senturia An Phú" loading="lazy">
+        </div>
         <div class="p-body">
           <span class="p-tag">91 căn Shophouse</span>
           <h4>Nhà phố thương mại</h4>
@@ -1532,7 +2924,7 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
       <h2>Không gian sống chuẩn resort khép kín</h2>
       <p>Hơn 1,29ha dành cho cảnh quan, mảng xanh, mặt nước và hệ thống tiện ích đẳng cấp cao.</p>
     </div>
-    <div class="amen-groups">
+    <!-- <div class="amen-groups">
       <div class="amen-col reveal">
         <h4><span class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2.3c1.7 7.7-1 14.4-8.2 17.7Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></span>Nghỉ dưỡng</h4>
         <ul>
@@ -1562,11 +2954,20 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
           <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Môi trường sống an toàn đa thế hệ</li>
         </ul>
       </div>
-    </div>
+    </div> -->
     <div class="amen-imgs">
-      <figure class="img-real reveal"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="park" alt="Công viên và hồ cảnh quan nội khu" loading="lazy"><figcaption>Công viên & hồ cảnh quan nội khu</figcaption></figure>
-      <figure class="img-real reveal"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="hero" alt="Sân vườn riêng và không gian nghỉ dưỡng" loading="lazy"><figcaption>Không gian nghỉ dưỡng riêng tư</figcaption></figure>
-      <figure class="img-real reveal"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="town" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"><figcaption>Kiến trúc hòa quyện cảnh quan</figcaption></figure>
+      <figure class="img-real reveal">
+        <img src="./img/ho-boi.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy"><figcaption>Công viên - hồ cảnh quan</figcaption>
+        </figure>
+      <figure class="img-real reveal">
+        <img src="./img/cau-lac-bo.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy"><figcaption>Câu lạc bộ cộng đồng - Thư viện - Khu tổ chức yến tiệc</figcaption>
+      
+      </figure>
+      <figure class="img-real reveal">
+        <img src="./img/khu-vui-choi.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy"><figcaption>Khu vui chơi trẻ em ngoài trời</figcaption></figure>
+      <figure class="img-real reveal"><img src="./img/gym.png" alt="Phòng Gym hiện đại" loading="lazy"><figcaption>Phòng Gym hiện đại</figcaption></figure>
+      <figure class="img-real reveal"><img src="./img/bbq.png"  alt="Sân vườn riêng và không gian nghỉ dưỡng" loading="lazy"><figcaption>BBQ</figcaption></figure>
+      <figure class="img-real reveal"><img src="./img/khu-the-thao-ngoai-troi.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"><figcaption>Khu thể thao ngoài trời</figcaption></figure>
     </div>
     <div class="cta-inline reveal">
       <button class="cta-pulse js-open-form" data-source="Sau muc Tien ich" data-title="Đăng ký tham quan nhà mẫu">
@@ -1602,12 +3003,55 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
           <div class="st"><b>355</b><span>Sản phẩm giới hạn</span></div>
         </div>
       </div>
-      <div class="reveal">
-        <figure class="img-real">
-          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="town" alt="Cảnh quan Double Green Senturia An Phú" loading="lazy">
-          <figcaption>Hai lớp xanh - vườn riêng từng căn và công viên toàn khu</figcaption>
-        </figure>
+  <div class="reveal">
+  <figure class="img-real green-banner">
+    <div class="green-banner-viewport">
+      <div class="green-banner-track">
+
+        <div class="green-banner-slide">
+          <img
+            src="./img/double-green.png"
+            alt="Vườn riêng tại Senturia An Phú"
+          >
+        </div>
+
+        <div class="green-banner-slide">
+          <img
+            src="./img/double-green-2.png"
+            alt="Công viên và cảnh quan Senturia An Phú"
+            loading="lazy"
+          >
+        </div>
+
       </div>
+
+      <button
+        class="green-banner-btn green-banner-prev"
+        type="button"
+        aria-label="Hình trước"
+      >
+        &#10094;
+      </button>
+
+      <button
+        class="green-banner-btn green-banner-next"
+        type="button"
+        aria-label="Hình tiếp theo"
+      >
+        &#10095;
+      </button>
+
+      <div class="green-banner-dots">
+        <button class="green-banner-dot active" type="button" aria-label="Hình 1"></button>
+        <button class="green-banner-dot" type="button" aria-label="Hình 2"></button>
+      </div>
+    </div>
+
+    <figcaption>
+      Hai lớp xanh – vườn riêng từng căn và công viên toàn khu
+    </figcaption>
+  </figure>
+</div>
     </div>
   </div>
 </section>
@@ -1623,7 +3067,12 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
     </div>
     <div class="master-box reveal">
       <div class="img-ph" style="min-height:250px">
-        <div class="ph-inner"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><div class="cap">Mặt bằng phân lô tổng thể</div><div class="hint">[ Chèn ảnh master plan phân khu tại đây ]</div></div>
+        <div class="ph-inner">
+
+            <img src="./img/mat-bang-phan-lo.png" alt="">
+          </div>
+        
+        </div>
       </div>
       <div class="master-legend">
         <span><span class="dot" style="background:#E5A823"></span>Nhà phố vườn</span>
@@ -1632,8 +3081,82 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
         <span><span class="dot" style="background:#5aa0e0"></span>Mặt nước - cảnh quan</span>
         <span><span class="dot" style="background:#4a8f3f"></span>Công viên - tiện ích</span>
       </div>
-    </div>
+  
+<div class="partners-slider reveal">
 
+  <div class="partners-viewport">
+    <div class="partners-track">
+
+      <article class="partner-card">
+        <span class="partner-card__role">Chủ đầu tư</span>
+
+        <h3>Nguyễn Phương</h3>
+
+        <p>
+          Đơn vị chủ đầu tư dự án Senturia An Phú.
+        </p>
+      </article>
+
+      <article class="partner-card">
+        <span class="partner-card__role">Nhà phát triển</span>
+
+        <h3>Tiến Phước Group</h3>
+
+        <p>
+          Đơn vị phát triển và triển khai dự án.
+        </p>
+      </article>
+
+      <article class="partner-card">
+        <span class="partner-card__role">Thiết kế kiến trúc</span>
+
+        <h3>EDAT</h3>
+
+        <p>
+          Tư vấn định hướng và thiết kế kiến trúc.
+        </p>
+      </article>
+
+      <article class="partner-card">
+        <span class="partner-card__role">Thiết kế cảnh quan</span>
+
+        <h3>ONG &amp; ONG</h3>
+
+        <p>
+          Đơn vị tư vấn thiết kế cảnh quan dự án.
+        </p>
+      </article>
+
+      <article class="partner-card">
+        <span class="partner-card__role">Quản lý vận hành</span>
+
+        <h3>Savills</h3>
+
+        <p>
+          Đơn vị tư vấn quản lý và vận hành.
+        </p>
+      </article>
+
+    </div>
+  </div>
+
+  <button
+    class="partners-arrow partners-arrow--prev"
+    type="button"
+    aria-label="Xem đối tác trước"
+  >
+    ‹
+  </button>
+
+  <button
+    class="partners-arrow partners-arrow--next"
+    type="button"
+    aria-label="Xem đối tác tiếp theo"
+  >
+    ›
+  </button>
+
+</div>
     <!-- HIGHLIGHT: 100% không đối lưng -->
     <div class="no-back-highlight reveal">
       <div class="nbh-copy">
@@ -1642,14 +3165,16 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
           Đặc quyền quy hoạch
         </span>
         <h3><span class="nbh-num">100%</span> căn nhà không đối lưng<br>riêng tư trọn vẹn</h3>
-        <p>Không một căn nhà nào quay lưng vào nhau. Mỗi căn đều có 2 mặt thoáng, vườn trước - vườn sau, đảm bảo sự riêng tư tuyệt đối và đón trọn ánh sáng, gió trời tự nhiên.</p>
+        <p>Mỗi căn đều có 2 mặt thoáng, vườn trước - vườn sau, đảm bảo sự riêng tư tuyệt đối và đón trọn ánh sáng, gió trời tự nhiên.</p>
         <button class="btn btn-gold js-open-form" data-source="Mat bang - Khong doi lung">
           Nhận mặt bằng & vị trí căn đẹp
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
       <figure class="nbh-img">
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="villa" alt="100% căn nhà không đối lưng, riêng tư trọn vẹn" loading="lazy">
+        <img 
+        src="./img/dac-quyen-huy-hoach.png"
+        alt="100% căn nhà không đối lưng, riêng tư trọn vẹn" loading="lazy">
       </figure>
     </div>
     <div class="cta-inline reveal">
@@ -1659,6 +3184,8 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
         <svg class="cp-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
+
+
   </div>
 </section>
 
@@ -2360,6 +3887,226 @@ document.addEventListener("DOMContentLoaded", function () {
     showSlide(0);
     startAutoplay();
   });
+});
+document.addEventListener("DOMContentLoaded", function () {
+  const galleryItems = document.querySelectorAll(".location-gallery__item");
+  const lightbox = document.getElementById("locationLightbox");
+  const lightboxImage = document.getElementById("locationLightboxImage");
+  const closeButton = lightbox.querySelector(".location-lightbox__close");
+
+  if (!galleryItems.length || !lightbox || !lightboxImage) {
+    return;
+  }
+
+  function openLightbox(imageSrc, imageAlt) {
+    lightboxImage.src = imageSrc;
+    lightboxImage.alt = imageAlt || "Hình ảnh vị trí dự án";
+
+    lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("location-lightbox-open");
+
+    closeButton.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("is-open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("location-lightbox-open");
+
+    setTimeout(function () {
+      lightboxImage.src = "";
+      lightboxImage.alt = "";
+    }, 250);
+  }
+
+  galleryItems.forEach(function (item) {
+    item.addEventListener("click", function () {
+      const imageSrc = item.dataset.full;
+      const imageAlt = item.dataset.alt;
+
+      openLightbox(imageSrc, imageAlt);
+    });
+  });
+
+  closeButton.addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", function (event) {
+    if (event.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+      closeLightbox();
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.green-banner').forEach(function (slider) {
+    const viewport = slider.querySelector('.green-banner-viewport');
+    const track = slider.querySelector('.green-banner-track');
+    const slides = slider.querySelectorAll('.green-banner-slide');
+    const prevButton = slider.querySelector('.green-banner-prev');
+    const nextButton = slider.querySelector('.green-banner-next');
+    const dots = slider.querySelectorAll('.green-banner-dot');
+
+    if (!track || slides.length <= 1) return;
+
+    let currentIndex = 0;
+    let autoSlide;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    function updateSlider() {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      dots.forEach(function (dot, index) {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateSlider();
+    }
+
+    function prevSlide() {
+      currentIndex =
+        (currentIndex - 1 + slides.length) % slides.length;
+
+      updateSlider();
+    }
+
+    function startAutoSlide() {
+      stopAutoSlide();
+      autoSlide = setInterval(nextSlide, 4000);
+    }
+
+    function stopAutoSlide() {
+      if (autoSlide) {
+        clearInterval(autoSlide);
+      }
+    }
+
+    nextButton?.addEventListener('click', function () {
+      nextSlide();
+      startAutoSlide();
+    });
+
+    prevButton?.addEventListener('click', function () {
+      prevSlide();
+      startAutoSlide();
+    });
+
+    dots.forEach(function (dot, index) {
+      dot.addEventListener('click', function () {
+        currentIndex = index;
+        updateSlider();
+        startAutoSlide();
+      });
+    });
+
+    viewport.addEventListener('mouseenter', stopAutoSlide);
+    viewport.addEventListener('mouseleave', startAutoSlide);
+
+    viewport.addEventListener(
+      'touchstart',
+      function (event) {
+        touchStartX = event.changedTouches[0].clientX;
+        stopAutoSlide();
+      },
+      { passive: true }
+    );
+
+    viewport.addEventListener(
+      'touchend',
+      function (event) {
+        touchEndX = event.changedTouches[0].clientX;
+
+        const distance = touchStartX - touchEndX;
+
+        if (Math.abs(distance) > 50) {
+          distance > 0 ? nextSlide() : prevSlide();
+        }
+
+        startAutoSlide();
+      },
+      { passive: true }
+    );
+
+    updateSlider();
+    startAutoSlide();
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const slider = document.querySelector(".partners-slider");
+
+  if (!slider) return;
+
+  const viewport = slider.querySelector(".partners-viewport");
+  const track = slider.querySelector(".partners-track");
+  const cards = Array.from(track.querySelectorAll(".partner-card"));
+  const prevButton = slider.querySelector(".partners-arrow--prev");
+  const nextButton = slider.querySelector(".partners-arrow--next");
+
+  let currentIndex = 0;
+
+  function getSlidesPerView() {
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 900) return 2;
+
+    return 3;
+  }
+
+  function getTrackGap() {
+    const trackStyle = window.getComputedStyle(track);
+
+    return parseFloat(trackStyle.columnGap || trackStyle.gap) || 0;
+  }
+
+  function getMaxIndex() {
+    return Math.max(0, cards.length - getSlidesPerView());
+  }
+
+  function updateSlider() {
+    if (!cards.length) return;
+
+    const maxIndex = getMaxIndex();
+
+    currentIndex = Math.max(
+      0,
+      Math.min(currentIndex, maxIndex)
+    );
+
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    const gap = getTrackGap();
+    const offset = currentIndex * (cardWidth + gap);
+
+    track.style.transform = `translate3d(-${offset}px, 0, 0)`;
+
+    prevButton.disabled = currentIndex === 0;
+    nextButton.disabled = currentIndex >= maxIndex;
+  }
+
+  prevButton.addEventListener("click", function () {
+    currentIndex -= 1;
+    updateSlider();
+  });
+
+  nextButton.addEventListener("click", function () {
+    currentIndex += 1;
+    updateSlider();
+  });
+
+  window.addEventListener("resize", function () {
+    window.requestAnimationFrame(updateSlider);
+  });
+
+  updateSlider();
 });
 </script>
 </body>

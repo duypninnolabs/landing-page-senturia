@@ -232,10 +232,7 @@ body.location-lightbox-open {
     gap: 10px;
   }
 
-  .location-gallery__item:first-child {
-    grid-column: 1 / -1;
-    aspect-ratio: 16 / 9;
-  }
+
 
   .location-gallery__title {
     margin-bottom: 16px;
@@ -293,6 +290,7 @@ body.location-lightbox-open {
 }
 
 .partners-slider {
+  margin-top: 50px;
   position: relative;
   width: 100%;
   padding: 8px 4px 28px;
@@ -314,7 +312,10 @@ body.location-lightbox-open {
 }
 
 /* ============ CARD ĐỐI TÁC ============ */
-
+.partner-card img {
+    width: 100px;
+    margin: auto;
+}
 .partners-track .partner-card {
   position: relative;
 
@@ -617,6 +618,9 @@ body.location-lightbox-open {
     right: calc(50% - 50px);
   }
 }
+#sanpham .location-gallery__item{
+  height: 200px !important;;
+}
 
 /* Lớp phủ */
 .sap-slide-shade {
@@ -808,7 +812,7 @@ body.location-lightbox-open {
 }
 
 .green-banner figcaption {
-  margin-top: 12px;
+  
   color: rgba(255, 255, 255, 0.75);
   font-size: 14px;
   line-height: 1.5;
@@ -1930,6 +1934,20 @@ body.location-lightbox-open {
   white-space: nowrap;
   text-transform: uppercase;
 }
+#green .location-gallery__item,
+#matbang .location-gallery__item{
+  height: 100% !important;
+  aspect-ratio:auto !important;
+}
+#green .location-gallery__item img,
+#matbang .location-gallery__item img{
+  height: 100% !important;
+  object-fit:fill !important;
+}
+#matbang .img-real{
+  overflow: visible !important;
+  height: 100% !important;
+}
 
 /* CTA */
 
@@ -1982,6 +2000,11 @@ body.location-lightbox-open {
 
   .promo-body {
     padding: 42px 20px 28px;
+  }
+  #green .img-real{
+      overflow: visible !important;
+
+    height: 100% !important;
   }
 
   .promo-logo {
@@ -2062,19 +2085,23 @@ body.location-lightbox-open {
 @media(max-width:1024px){
   .hero-grid{grid-template-columns:1fr;gap:38px}
   .lead-card{max-width:520px;margin:0 auto}
+    #hatang   .infra-grid,.prod-grid,.amen-groups,.diff-grid,.amen-imgs{grid-template-columns:repeat(3,1fr)}
+
   .infra-grid,.prod-grid,.amen-groups{grid-template-columns:repeat(2,1fr)}
   .diff-grid{grid-template-columns:repeat(2,1fr);gap:26px}
   .final-grid{grid-template-columns:1fr;gap:36px}
   .loc-grid,.green-grid{grid-template-columns:1fr;gap:32px}
   .loc-grid .img-real img,.green-grid .img-real img{min-height:280px}
 }
-@media(max-width:768px){
+@media(max-width:767px){
   .section{padding:60px 0}
   .nav-links{display:none}
   .hamburger{display:block}
   .nav>.nav-cta{display:none}
   .hero-usp{grid-template-columns:repeat(2,1fr)}
   .loc-grid,.green-grid,.policy-grid,.legal-grid{grid-template-columns:1fr;gap:32px}
+  #hatang   .infra-grid,.prod-grid,.amen-groups,.diff-grid,.amen-imgs{grid-template-columns:repeat(2,1fr)}
+
   .infra-grid,.prod-grid,.amen-groups,.diff-grid,.amen-imgs{grid-template-columns:1fr}
   .amen-imgs{grid-template-columns:repeat(2,1fr)}
   .footer-grid{grid-template-columns:1fr;gap:28px}
@@ -2097,6 +2124,21 @@ body.location-lightbox-open {
 }
 </style>
 </head>
+
+<div class="location-lightbox" id="masterLightbox">
+  <button
+    type="button"
+    class="location-lightbox__close"
+    onclick="closeMasterImage()"
+    aria-label="Đóng ảnh"
+  >
+    ×
+  </button>
+
+  <div class="location-lightbox__content">
+    <img id="masterLightboxImage" src="" alt="Ảnh mặt bằng phóng to">
+  </div>
+</div>
 <body>
 
 <!-- ============ POPUP KHUYẾN MÃI (tự bật sau 2s) ============ -->
@@ -2161,6 +2203,9 @@ body.location-lightbox-open {
           <div class="pv-value">
             30<small>%</small>
           </div>
+          <div class="interest-time">
+                 Nhận nhà Q4 2026
+              </div>
         </div>
 
         <!-- Lãi suất -->
@@ -2582,55 +2627,7 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
   </div>
 
 </section>
-  <section class="location-gallery">
 
-<div class="container">
-  
-  <div class="location-gallery__grid">
-
-    <button
-      type="button"
-      class="location-gallery__item"
-      data-full="./img/tien-ich-xung-quanh.png"
-      data-alt="Vị trí dự án - hình 1"
-    >
-  
-       <figure class="img-real">
-          <img  src="./img/tien-ich-xung-quanh.png" alt="Bản đồ vị trí và kết nối Senturia An Phú" loading="lazy">
-          <figcaption>Tiện ích xung quanh dự án</figcaption>
-        </figure>
-    </button>
-
-    <button
-      type="button"
-      class="location-gallery__item"
-      data-full="./img/vi-tri-ga-binh-trung.png"
-      data-alt="Vị trí dự án - hình 2"
-    >
- 
-      <figure class="img-real">
-          <img  src="./img/vi-tri-ga-binh-trung.png" alt="Bản đồ vị trí và kết nối Senturia An Phú" loading="lazy">
-          <figcaption>Vị trí ngay Ga Bình Trưng, tuyến metro Thủ Thiêm - sân bay Long Thành</figcaption>
-        </figure>
-    </button>
-
-    <button
-      type="button"
-      class="location-gallery__item"
-      data-full="./img/doi-dien-khu-lien-hop.png"
-      data-alt="Vị trí dự án - hình 3"
-    >
-     <figure class="img-real">
-          <img  src="./img/doi-dien-khu-lien-hop.png" alt="Bản đồ vị trí và kết nối Senturia An Phú" loading="lazy">
-          <figcaption>Đối diện Khu liên hợp TDTT Rạch Chiếc - SunGroup phát triển 2026-2030</figcaption>
-        </figure>
-      
-    </button>
-
-  </div>
-</div>
-
-</section>
 
 
 <!-- Popup phóng to ảnh -->
@@ -2692,11 +2689,8 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
         </div>
       </div>
       <div class="reveal loc-right">
-        <figure class="img-real">
-          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="map" alt="Bản đồ vị trí và kết nối Senturia An Phú" loading="lazy">
-          <figcaption>Vị trí Senturia An Phú - mặt tiền Song Hành, đối diện The Global City</figcaption>
-        </figure>
-        <a class="tour-card" href="https://www.senturia.com.vn/senturia-an-phu/virtual-tour/#v04" target="_blank" rel="noopener">
+        
+        <a class="tour-card" href="https://www.senturia.com.vn/senturia-an-phu/virtual-tour/#node_tongquan" target="_blank" rel="noopener">
           <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-si="station" alt="Virtual Tour 360 độ Senturia An Phú" loading="lazy">
           <span class="tc-overlay">
             <span class="tc-play">
@@ -2707,6 +2701,55 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
         </a>
       </div>
     </div>
+      <section class="location-gallery">
+
+<div class="">
+  
+  <div class="location-gallery__grid">
+
+    <button
+      type="button"
+      class="location-gallery__item"
+      data-full="./img/SAP_Bản đồ vị trí.jpg"
+      data-alt="Vị trí dự án - hình 1"
+    >
+  
+       <figure class="img-real">
+          <img  src="./img/SAP_Bản đồ vị trí.jpg" alt="Bản đồ vị trí và kết nối Senturia An Phú" loading="lazy">
+          <figcaption>Tiện ích xung quanh dự án</figcaption>
+        </figure>
+    </button>
+
+    <button
+      type="button"
+      class="location-gallery__item"
+      data-full="./img/vi-tri-ga-binh-trung.png"
+      data-alt="Vị trí dự án - hình 2"
+    >
+ 
+      <figure class="img-real">
+          <img  src="./img/vi-tri-ga-binh-trung.png" alt="Bản đồ vị trí và kết nối Senturia An Phú" loading="lazy">
+          <figcaption>Vị trí ngay Ga Bình Trưng, tuyến metro Thủ Thiêm - sân bay Long Thành</figcaption>
+        </figure>
+    </button>
+
+    <button
+      type="button"
+      class="location-gallery__item"
+      data-full="./img/doi-dien-khu-lien-hop.png"
+      data-alt="Vị trí dự án - hình 3"
+    >
+     <figure class="img-real">
+          <img  src="./img/doi-dien-khu-lien-hop.png" alt="Bản đồ vị trí và kết nối Senturia An Phú" loading="lazy">
+          <figcaption>Đối diện Khu liên hợp TDTT Rạch Chiếc - SunGroup phát triển 2026-2030</figcaption>
+        </figure>
+      
+    </button>
+
+  </div>
+</div>
+
+</section>
     <div class="cta-inline reveal">
       <button class="cta-pulse js-open-form" data-source="Sau muc Vi tri" data-title="Đăng ký nhận vị trí & mặt bằng">
         <span class="cp-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
@@ -2764,35 +2807,35 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
     </div> -->
        <div class="infra-grid">
       <figure class="img-real reveal">
-        <img src="./img/nut-giao-an-phu.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy">
+        <img src="./img/Artboard 1.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy">
 
         </figure>
       <figure class="img-real reveal">
-        <img src="./img/cao-toc-tpchm-long-thanh.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy">
+        <img src="./img/Artboard 2.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy">
         
       
       </figure>
       <figure class="img-real reveal">
-        <img src="./img/san-bay-quoc-te-long-thanh.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy">
+        <img src="./img/Artboard 3.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy">
         
       </figure>
-      <figure class="img-real reveal"><img src="./img/thu-thiem-long-thanh.png" alt="Phòng Gym hiện đại" loading="lazy">
+      <figure class="img-real reveal"><img src="./img/Artboard 4.png" alt="Phòng Gym hiện đại" loading="lazy">
  
         
       </figure>
-      <figure class="img-real reveal"><img src="./img/tuyen-duong-sat-cao-toc.png"  alt="Sân vườn riêng và không gian nghỉ dưỡng" loading="lazy">
+      <figure class="img-real reveal"><img src="./img/Artboard 5.png"  alt="Sân vườn riêng và không gian nghỉ dưỡng" loading="lazy">
       
       </figure>
-      <figure class="img-real reveal"><img src="./img/khu-lien-hop.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
-          <figure class="img-real reveal"><img src="./img/trung-tam-tai-chinh.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
-          <figure class="img-real reveal"><img src="./img/image.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+      <figure class="img-real reveal"><img src="./img/Artboard 6.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+          <figure class="img-real reveal"><img src="./img/Artboard 7.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+          <!-- <figure class="img-real reveal"><img src="./img/image.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
 
           <figure class="img-real reveal"><img src="./img/3.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
           <figure class="img-real reveal"><img src="./img/4.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
           <figure class="img-real reveal"><img src="./img/5.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
           <figure class="img-real reveal"><img src="./img/6.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
           <figure class="img-real reveal"><img src="./img/image.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
-          <figure class="img-real reveal"><img src="./img/2.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure>
+          <figure class="img-real reveal"><img src="./img/2.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"></figure> -->
     </div>
     <div class="cta-inline reveal">
       <button class="cta-pulse on-dark js-open-form" data-source="Sau muc Ha tang" data-title="Nhận phân tích tiềm năng tăng giá">
@@ -2816,7 +2859,17 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
     <div class="prod-grid">
       <div class="prod-card reveal">
         <div class="p-img">
+          <button
+      type="button"
+      class="location-gallery__item"
+      data-full="./img/nha-pho-vuon.png"
+      data-alt="Vị trí dự án - hình 1"
+    >
+  
+       <figure class="img-real">
           <img src="./img/nha-pho-vuon.png" alt="Nhà phố vườn Senturia An Phú" loading="lazy">
+        </figure>
+    </button>
         </div>
         <div class="p-body">
           <span class="p-tag">202 căn liên kế</span>
@@ -2832,8 +2885,19 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
         </div>
       </div>
       <div class="prod-card reveal">
+        
         <div class="p-img">
+          <button
+      type="button"
+      class="location-gallery__item"
+      data-full="./img/bien-thu-song-lap.png"
+      data-alt="Vị trí dự án - hình 1"
+    >
+  
+       <figure class="img-real">
           <img src="./img/bien-thu-song-lap.png" alt="Biệt thự song lập Senturia An Phú" loading="lazy">
+        </figure>
+    </button>
         </div>
         <div class="p-body">
           <span class="p-tag">62 căn giới hạn</span>
@@ -2850,7 +2914,17 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
       </div>
       <div class="prod-card reveal">
         <div class="p-img">
-          <img src="./img/nha-pho-thuong-mai.png" alt="Nhà phố thương mại Shophouse Senturia An Phú" loading="lazy">
+           <button
+      type="button"
+      class="location-gallery__item"
+      data-full="./img/nha-pho-thuong-mai.png"
+      data-alt="Vị trí dự án - hình 1"
+    >
+  
+       <figure class="img-real">
+          <img src="./img/nha-pho-thuong-mai.png" alt="Biệt thự song lập Senturia An Phú" loading="lazy">
+        </figure>
+    </button>
         </div>
         <div class="p-body">
           <span class="p-tag">91 căn Shophouse</span>
@@ -2955,20 +3029,107 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
         </ul>
       </div>
     </div> -->
-    <div class="amen-imgs">
-      <figure class="img-real reveal">
-        <img src="./img/ho-boi.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy"><figcaption>Công viên - hồ cảnh quan</figcaption>
-        </figure>
-      <figure class="img-real reveal">
-        <img src="./img/cau-lac-bo.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy"><figcaption>Câu lạc bộ cộng đồng - Thư viện - Khu tổ chức yến tiệc</figcaption>
-      
-      </figure>
-      <figure class="img-real reveal">
-        <img src="./img/khu-vui-choi.png" alt="Công viên và hồ cảnh quan nội khu" loading="lazy"><figcaption>Khu vui chơi trẻ em ngoài trời</figcaption></figure>
-      <figure class="img-real reveal"><img src="./img/gym.png" alt="Phòng Gym hiện đại" loading="lazy"><figcaption>Phòng Gym hiện đại</figcaption></figure>
-      <figure class="img-real reveal"><img src="./img/bbq.png"  alt="Sân vườn riêng và không gian nghỉ dưỡng" loading="lazy"><figcaption>BBQ</figcaption></figure>
-      <figure class="img-real reveal"><img src="./img/khu-the-thao-ngoai-troi.png" alt="Kiến trúc và cảnh quan Senturia An Phú" loading="lazy"><figcaption>Khu thể thao ngoài trời</figcaption></figure>
-    </div>
+   <div class="amen-imgs">
+
+  <button
+    type="button"
+    class="location-gallery__item"
+    data-full="./img/ho-boi.png"
+    data-alt="Công viên và hồ cảnh quan"
+  >
+    <figure class="img-real reveal">
+      <img
+        src="./img/ho-boi.png"
+        alt="Công viên và hồ cảnh quan"
+        loading="lazy"
+      >
+      <figcaption>Công viên - hồ cảnh quan</figcaption>
+    </figure>
+  </button>
+
+  <button
+    type="button"
+    class="location-gallery__item"
+    data-full="./img/cau-lac-bo.png"
+    data-alt="Câu lạc bộ cộng đồng, thư viện và khu tổ chức yến tiệc"
+  >
+    <figure class="img-real reveal">
+      <img
+        src="./img/cau-lac-bo.png"
+        alt="Câu lạc bộ cộng đồng, thư viện và khu tổ chức yến tiệc"
+        loading="lazy"
+      >
+      <figcaption>
+        Câu lạc bộ cộng đồng - Thư viện - Khu tổ chức yến tiệc
+      </figcaption>
+    </figure>
+  </button>
+
+  <button
+    type="button"
+    class="location-gallery__item"
+    data-full="./img/khu-vui-choi.png"
+    data-alt="Khu vui chơi trẻ em ngoài trời"
+  >
+    <figure class="img-real reveal">
+      <img
+        src="./img/khu-vui-choi.png"
+        alt="Khu vui chơi trẻ em ngoài trời"
+        loading="lazy"
+      >
+      <figcaption>Khu vui chơi trẻ em ngoài trời</figcaption>
+    </figure>
+  </button>
+
+  <button
+    type="button"
+    class="location-gallery__item"
+    data-full="./img/gym.png"
+    data-alt="Phòng Gym hiện đại"
+  >
+    <figure class="img-real reveal">
+      <img
+        src="./img/gym.png"
+        alt="Phòng Gym hiện đại"
+        loading="lazy"
+      >
+      <figcaption>Phòng Gym hiện đại</figcaption>
+    </figure>
+  </button>
+
+  <button
+    type="button"
+    class="location-gallery__item"
+    data-full="./img/bbq.png"
+    data-alt="Khu vực BBQ ngoài trời"
+  >
+    <figure class="img-real reveal">
+      <img
+        src="./img/bbq.png"
+        alt="Khu vực BBQ ngoài trời"
+        loading="lazy"
+      >
+      <figcaption>BBQ</figcaption>
+    </figure>
+  </button>
+
+  <button
+    type="button"
+    class="location-gallery__item"
+    data-full="./img/khu-the-thao-ngoai-troi.png"
+    data-alt="Khu thể thao ngoài trời"
+  >
+    <figure class="img-real reveal">
+      <img
+        src="./img/khu-the-thao-ngoai-troi.png"
+        alt="Khu thể thao ngoài trời"
+        loading="lazy"
+      >
+      <figcaption>Khu thể thao ngoài trời</figcaption>
+    </figure>
+  </button>
+
+</div>
     <div class="cta-inline reveal">
       <button class="cta-pulse js-open-form" data-source="Sau muc Tien ich" data-title="Đăng ký tham quan nhà mẫu">
         <span class="cp-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2.3c1.7 7.7-1 14.4-8.2 17.7Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></span>
@@ -2980,7 +3141,7 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
 </section>
 
 <!-- ============ DOUBLE GREEN ============ -->
-<section class="section green">
+<section class="section green" id="green">
   <div class="container">
     <div class="green-grid">
       <div class="reveal">
@@ -3009,18 +3170,43 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
       <div class="green-banner-track">
 
         <div class="green-banner-slide">
-          <img
+          <!-- <img
             src="./img/double-green.png"
             alt="Vườn riêng tại Senturia An Phú"
+          > -->
+          <button
+    type="button"
+    class="location-gallery__item"
+    data-full="./img/double-green.png"
+    data-alt="Khu vực BBQ ngoài trời"
+  >
+    <figure class="img-real reveal">
+      <img
+            src="./img/double-green.png"
+            alt="Vườn riêng tại Senturia An Phú"
+                        loading="lazy"
+
           >
+    </figure>
+  </button>
         </div>
 
         <div class="green-banner-slide">
-          <img
+    
+            <button
+    type="button"
+    class="location-gallery__item"
+    data-full="./img/double-green-2.png"
+    data-alt="Khu vực BBQ ngoài trời"
+  >
+    <figure class="img-real reveal">
+      <img
             src="./img/double-green-2.png"
-            alt="Công viên và cảnh quan Senturia An Phú"
+            alt="Vườn riêng tại Senturia An Phú"
             loading="lazy"
           >
+    </figure>
+  </button>
         </div>
 
       </div>
@@ -3069,7 +3255,19 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
       <div class="img-ph" style="min-height:250px">
         <div class="ph-inner">
 
-            <img src="./img/mat-bang-phan-lo.png" alt="">
+
+      <button
+      type="button"
+      class="location-gallery__item"
+      data-full="./img/MBTT_2.jpg"
+      data-alt="Vị trí dự án - hình 3"
+    >
+     <figure class="img-real">
+          <img  src="./img/MBTT_2.jpg" alt="Bản đồ vị trí và kết nối Senturia An Phú" loading="lazy">
+        </figure>
+      
+    </button>
+            
           </div>
         
         </div>
@@ -3082,7 +3280,84 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
         <span><span class="dot" style="background:#4a8f3f"></span>Công viên - tiện ích</span>
       </div>
   
+<div class="partners-slider reveal">
 
+  <div class="partners-viewport">
+    <div class="partners-track">
+
+      <article class="partner-card">
+        <span class="partner-card__role">Chủ đầu tư</span>
+
+        <img src="./img/logo-np.png" alt="Logo Nguyên Phương">
+        <h3>Nguyên Phương</h3>
+
+        <p>
+          Đơn vị chủ đầu tư dự án Senturia An Phú.
+        </p>
+      </article>
+
+      <article class="partner-card">
+        <span class="partner-card__role">Nhà phát triển</span>
+
+        <img src="./img/logo-tp.png" alt="Logo Tiến Phước Group">
+        <h3>Tiến Phước Group</h3>
+
+        <p>
+          Đơn vị phát triển và triển khai dự án.
+        </p>
+      </article>
+
+      <article class="partner-card">
+        <span class="partner-card__role">Thiết kế kiến trúc</span>
+                <img src="./img/Logo FDTA.png" alt="Logo FDAT">
+
+        <h3>FDAT</h3>
+
+        <p>
+          Tư vấn định hướng và thiết kế kiến trúc.
+        </p>
+      </article>
+
+      <article class="partner-card">
+        <span class="partner-card__role">Thiết kế cảnh quan</span>
+        <img src="./img/Logo Ong&Ong.png" alt="">
+        <h3>ONG &amp; ONG</h3>
+
+        <p>
+          Đơn vị tư vấn thiết kế cảnh quan dự án.
+        </p>
+      </article>
+
+      <article class="partner-card">
+        <span class="partner-card__role">Quản lý vận hành</span>
+        <img src="./img/Logo Savills.png" alt="Logo Savills">
+        <h3>Savills</h3>
+
+        <p>
+          Đơn vị tư vấn quản lý và vận hành.
+        </p>
+      </article>
+
+    </div>
+  </div>
+
+  <button
+    class="partners-arrow partners-arrow--prev"
+    type="button"
+    aria-label="Xem đối tác trước"
+  >
+    ‹
+  </button>
+
+  <button
+    class="partners-arrow partners-arrow--next"
+    type="button"
+    aria-label="Xem đối tác tiếp theo"
+  >
+    ›
+  </button>
+
+</div>
     <!-- HIGHLIGHT: 100% không đối lưng -->
     <div class="no-back-highlight reveal">
       <div class="nbh-copy">
@@ -3097,11 +3372,26 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
-      <figure class="nbh-img">
+      <!-- <figure class="nbh-img">
         <img 
         src="./img/dac-quyen-huy-hoach.png"
         alt="100% căn nhà không đối lưng, riêng tư trọn vẹn" loading="lazy">
-      </figure>
+      </figure> -->
+
+       <button
+    type="button"
+    class="location-gallery__item"
+    data-full="./img/dac-quyen-huy-hoach.png"
+    data-alt="Công viên và hồ cảnh quan"
+  >
+    <figure class="img-real reveal">
+      <img
+        src="./img/dac-quyen-huy-hoach.png"
+        alt="Công viên và hồ cảnh quan"
+        loading="lazy"
+      >
+    </figure>
+  </button>
     </div>
     <div class="cta-inline reveal">
       <button class="cta-pulse js-open-form" data-source="Sau muc Mat bang" data-title="Nhận mặt bằng phân lô chi tiết">
@@ -3233,93 +3523,6 @@ Sở hữu không gian sống lý tưởng với sự kết hợp hài hòa gi�
         <div class="faq-a"><p>Cả hai. Với người ở thực: không gian xanh riêng tư chuẩn Home Resort, 100% căn không đối lưng, môi trường an toàn cho gia đình đa thế hệ. Với nhà đầu tư: sản phẩm thấp tầng khan hiếm khu Đông, hưởng lợi hạ tầng tỷ đô (nút giao An Phú, cao tốc Long Thành mở rộng, Metro), tiềm năng tăng giá chu kỳ 2026-2030, pháp lý rõ ràng - thanh khoản cao.</p></div>
       </div>
     </div>
-  </div>
-</section>
-<section class="section faq">
-  <div class="container">
-    <div class="section-head center reveal">
-      <div class="section-tag">Các Nhà Đầu Tư</div>
-      <h2 class="eyebrow-serif">Chủ đầu tư và đối tác chiến lược</h2>
-      <p>
-Senturia An Phú được phát triển bởi Công ty BĐS Nguyên Phương - thành viên Công ty CP BĐS Tiến Phước với gần 35 năm kinh nghiệm trong ngành bất động sản.
-
-      </p>
-    </div>
-    <div class="partners-slider reveal">
-
-  <div class="partners-viewport">
-    <div class="partners-track">
-
-      <article class="partner-card">
-        <span class="partner-card__role">Chủ đầu tư</span>
-
-        <h3>Nguyễn Phương</h3>
-
-        <p>
-          Đơn vị chủ đầu tư dự án Senturia An Phú.
-        </p>
-      </article>
-
-      <article class="partner-card">
-        <span class="partner-card__role">Nhà phát triển</span>
-
-        <h3>Tiến Phước Group</h3>
-
-        <p>
-          Đơn vị phát triển và triển khai dự án.
-        </p>
-      </article>
-
-      <article class="partner-card">
-        <span class="partner-card__role">Thiết kế kiến trúc</span>
-
-        <h3>EDAT</h3>
-
-        <p>
-          Tư vấn định hướng và thiết kế kiến trúc.
-        </p>
-      </article>
-
-      <article class="partner-card">
-        <span class="partner-card__role">Thiết kế cảnh quan</span>
-
-        <h3>ONG &amp; ONG</h3>
-
-        <p>
-          Đơn vị tư vấn thiết kế cảnh quan dự án.
-        </p>
-      </article>
-
-      <article class="partner-card">
-        <span class="partner-card__role">Quản lý vận hành</span>
-
-        <h3>Savills</h3>
-
-        <p>
-          Đơn vị tư vấn quản lý và vận hành.
-        </p>
-      </article>
-
-    </div>
-  </div>
-
-  <button
-    class="partners-arrow partners-arrow--prev"
-    type="button"
-    aria-label="Xem đối tác trước"
-  >
-    ‹
-  </button>
-
-  <button
-    class="partners-arrow partners-arrow--next"
-    type="button"
-    aria-label="Xem đối tác tiếp theo"
-  >
-    ›
-  </button>
-
-</div>
   </div>
 </section>
 
@@ -3572,68 +3775,183 @@ document.querySelectorAll('[data-si]').forEach(function(el){el.src=SI[el.dataset
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
   /* ---------- FORM validation (chưa nối backend) ---------- */
-  // Validate SĐT Việt Nam: bắt đầu 0, 10 số, đầu số hợp lệ 03/05/07/08/09
-  function isValidPhoneVN(p){
-    var d=p.replace(/[\s.\-()]/g,'');
-    return /^(0|84|\+84)(3|5|7|8|9)[0-9]{8}$/.test(d) || /^0(3|5|7|8|9)[0-9]{8}$/.test(d);
+/* ---------- FORM VALIDATION + GOOGLE SHEETS ---------- */
+
+var GOOGLE_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbw0PlGu-ecqE1cQv41cmExq87l9b2HHypPOxu-8UqAITqP6d0T9a1dejen207eTUPrzMQ/exec';
+
+/* Chuẩn hóa số điện thoại */
+function normalizePhoneVN(phone) {
+  return String(phone || '').replace(/[\s.\-()]/g, '');
+}
+
+/* Validate SĐT Việt Nam */
+function isValidPhoneVN(phone) {
+  var number = normalizePhoneVN(phone);
+
+  return /^(0|\+84|84)(3|5|7|8|9)[0-9]{8}$/.test(number);
+}
+
+/* Hiển thị hoặc ẩn lỗi */
+function showErr(input, show) {
+  if (!input) return;
+
+  input.classList.toggle('err', show);
+  input.setAttribute('aria-invalid', String(show));
+
+  var group = input.closest('.form-group');
+  var box = group ? group.querySelector('.field-error') : null;
+
+  if (box) {
+    box.classList.toggle('show', show);
   }
-  function showErr(input,show){
-    input.classList.toggle('err',show);
-    var box=input.closest('.form-group').querySelector('.field-error');
-    if(box)box.classList.toggle('show',show);
+}
+
+/* Trạng thái nút gửi */
+function setSubmitting(form, isSubmitting) {
+  var button = form.querySelector('button[type="submit"]');
+
+  if (!button) return;
+
+  if (!button.dataset.originalHtml) {
+    button.dataset.originalHtml = button.innerHTML;
   }
-  function handleForm(form){
-    if(!form)return;
-    form.addEventListener('submit',function(e){
-      e.preventDefault();
-      // Honeypot: nếu field ẩn có giá trị -> bỏ qua (bot)
-      var hp=form.querySelector('.hp-field input');
-      if(hp && hp.value.trim()!==''){ return; }
 
-      var name=form.querySelector('[name="fullname"]');
-      var phone=form.querySelector('[name="phone"]');
-      var demand=form.querySelector('[name="demand"]');
-      var ok=true;
+  button.disabled = isSubmitting;
 
-      if(!name.value.trim()||name.value.trim().length<2){showErr(name,true);ok=false;}else showErr(name,false);
-      if(!isValidPhoneVN(phone.value)){showErr(phone,true);ok=false;}else showErr(phone,false);
-      if(!demand.value){showErr(demand,true);ok=false;}else showErr(demand,false);
+  if (isSubmitting) {
+    button.textContent = 'ĐANG GỬI THÔNG TIN...';
+  } else {
+    button.innerHTML = button.dataset.originalHtml;
+  }
+}
 
-      if(!ok){
-        var firstErr=form.querySelector('.err');
-        if(firstErr)firstErr.focus();
-        return;
-      }
+/* Xử lý từng form */
+function handleForm(form) {
+  if (!form) return;
 
-      // ===== ĐỦ ĐIỀU KIỆN — thu thập payload =====
-      var srcInput=form.querySelector('[name="source"]');
-      var payload={
-        event:'lead',
-        fullname:name.value.trim(),
-        phone:phone.value.replace(/[\s.\-()]/g,''),
-        demand:demand.value,
-        form_position:srcInput?srcInput.value:(form.id||'form'),
-        source_url:location.href,
-        submitted_at:new Date().toISOString()
-      };
-      // TODO: Team dev/n8n nối backend tại đây.
-      //   fetch('WEBHOOK_URL',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-      // KHÔNG gọi CAPI trực tiếp từ frontend — backend tự xử lý.
-      console.log('[Senturia LEAD]',payload);
+  var fields = form.querySelectorAll(
+    '[name="fullname"], [name="phone"], [name="demand"]'
+  );
 
-      // Nếu đang ở modal thì đóng modal trước khi hiện cảm ơn
-      var inModal=form.closest('.modal-overlay');
-      if(inModal){
-        inModal.classList.remove('show');
-        document.body.style.overflow='';
-      }
-      showThankYou();
-      form.reset();
+  /* Xóa lỗi khi người dùng nhập lại */
+  fields.forEach(function (input) {
+    input.addEventListener('input', function () {
+      showErr(input, false);
     });
-  }
-  handleForm(document.getElementById('leadForm'));
-  handleForm(document.getElementById('leadForm2'));
-  handleForm(document.getElementById('modalForm'));
+
+    input.addEventListener('change', function () {
+      showErr(input, false);
+    });
+  });
+
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    /* Honeypot chống bot */
+    var hp = form.querySelector('.hp-field input');
+
+    if (hp && hp.value.trim() !== '') {
+      return;
+    }
+
+    var name = form.querySelector('[name="fullname"]');
+    var phone = form.querySelector('[name="phone"]');
+    var demand = form.querySelector('[name="demand"]');
+    var sourceInput = form.querySelector('[name="source"]');
+
+    if (!name || !phone || !demand) {
+      console.error('Form đang thiếu fullname, phone hoặc demand.');
+      return;
+    }
+
+    var nameValid = name.value.trim().length >= 2;
+    var phoneValid = isValidPhoneVN(phone.value);
+    var demandValid = demand.value.trim() !== '';
+
+    showErr(name, !nameValid);
+    showErr(phone, !phoneValid);
+    showErr(demand, !demandValid);
+
+    if (!nameValid || !phoneValid || !demandValid) {
+      var firstError = form.querySelector('.err');
+
+      if (firstError) {
+        firstError.focus();
+      }
+
+      return;
+    }
+
+    var payload = {
+      event: 'lead',
+      fullname: name.value.trim(),
+      phone: normalizePhoneVN(phone.value),
+      demand: demand.value.trim(),
+      website: hp ? hp.value.trim() : '',
+      form_position: sourceInput
+        ? sourceInput.value
+        : (form.id || 'website-form'),
+      source: window.location.href,
+      source_url: window.location.href,
+      submitted_at: new Date().toISOString()
+    };
+
+    setSubmitting(form, true);
+
+    try {
+      var response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        redirect: 'follow',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error('HTTP error: ' + response.status);
+      }
+
+      var result = await response.json();
+
+      if (!result.success) {
+        throw new Error(result.message || 'Không thể lưu dữ liệu');
+      }
+
+      console.log('[Senturia LEAD]', payload);
+
+      /* Nếu form nằm trong modal thì đóng modal */
+      var inModal = form.closest('.modal-overlay');
+
+      if (inModal) {
+        inModal.classList.remove('show');
+        document.body.style.overflow = '';
+      }
+
+      form.reset();
+
+      fields.forEach(function (input) {
+        showErr(input, false);
+      });
+
+      showThankYou();
+    } catch (error) {
+      console.error('Lỗi gửi form:', error);
+
+      alert(
+        'Không thể gửi thông tin. Vui lòng thử lại hoặc gọi hotline 0973.145.553.'
+      );
+    } finally {
+      setSubmitting(form, false);
+    }
+  });
+}
+
+/* Kết nối cả 3 form */
+handleForm(document.getElementById('leadForm'));
+handleForm(document.getElementById('leadForm2'));
+handleForm(document.getElementById('modalForm'));
 
   /* ---------- MODAL FORM: chỉ hiện khi KH click CTA ---------- */
   var formModal=document.getElementById('formModal');
@@ -4121,6 +4439,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
   updateSlider();
 });
+
+
+function openMasterImage(image) {
+    const lightbox = document.getElementById("masterLightbox");
+    const lightboxImage = document.getElementById("masterLightboxImage");
+
+    lightboxImage.src = image.src;
+    lightboxImage.alt = image.alt;
+
+    lightbox.classList.add("is-open");
+    document.body.classList.add("location-lightbox-open");
+  }
+
+  function closeMasterImage() {
+    const lightbox = document.getElementById("masterLightbox");
+
+    lightbox.classList.remove("is-open");
+    document.body.classList.remove("location-lightbox-open");
+  }
+
+  document
+    .getElementById("masterLightbox")
+    .addEventListener("click", function (event) {
+      if (event.target === this) {
+        closeMasterImage();
+      }
+    });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closeMasterImage();
+    }
+  });
+
 </script>
 </body>
 </html>
